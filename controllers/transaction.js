@@ -29,6 +29,10 @@ exports.addTransactions = async (req, res, next) => {
   try {
     const { text, amount } = req.body;
 
+    const user = req.user;
+
+    req.body["user"] = user._id;
+
     const transaction = await Transaction.create(req.body);
 
     return res.status(201).json({
